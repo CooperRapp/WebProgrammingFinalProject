@@ -1,0 +1,55 @@
+select {
+  width: 400px;
+  font-size: 20px;
+}
+
+table, th, td {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+td {
+  font-size: 15px;
+  font-family: 'Dosis', sans-serif;
+  font-weight: 500;
+  padding-top: 24.8px;
+  padding-bottom: 15px;
+  width: 25%;
+  height: 25%;
+}
+
+th {
+  padding-top: 30px;
+}
+
+fieldset {
+  border-color: black;
+}
+
+img, option {
+  font-family: 'Dosis', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+optgroup{
+  font-family: 'Dosis', sans-serif;
+  font-weight: 600;
+  font-size: 30px;
+}
+
+.trash:hover {
+  background-color: red;
+  border-radius: 1.5em;
+}
+
+.cart_item {
+  transition-property: all;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
+}
+
+.cart_item:hover {
+  background-color: darksalmon;
+  border-radius: 1.5em;
+}

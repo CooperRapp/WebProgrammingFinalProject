@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title> Shop </title>
+
+    <link rel="stylesheet" href="shop.css">
+    <link rel="stylesheet" href="everything.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+
+      var shopping_cart = [];
+      var number_shirts = 0;
+      var number_hoodies = 0;
+      var number_hats = 0;
+
+      $(document).ready(function() 
+      {
+        let cart = document.getElementById("cart");
+        let item_number;
+
+        $(".item").click((event)=> {
+
+          if(!(shopping_cart.includes(event.target.id)))
+          {
+            let div = document.createElement("div");
+            div.setAttribute("style", "display: flex; gap: 25px; height: 50px");
+            div.setAttribute("id", event.target.id);
+            div.setAttribute("class", "cart_item");
+
+            if(event.target.parentElement.className == "shirt")
+            {
+              item_number = 0;
+            } 
+            if(event.target.parentElement.className == "hoodie")
+            {
+              item_number = 1;
+            } 
+            if(event.target.parentElement.className == "hat")
+            {
+              item_number = 2;
+            } 
+
+            let name = document.createElement("p");
+            let name_text = document.createTextNode(event.target.innerHTML);
+            name.appendChild(name_text);
+            div.appendChild(name);
+
+            let price = document.createElement("p");
+            let price_text;
+            if(item_number == 0) price_text = document.createTextNode("$24.95");
+            if(item_number == 1) price_text = document.createTextNode("$44.95");
+            if(item_number == 2) price_text = document.createTextNode("$14.95");
+            price.appendChild(price_text);
+            div.appendChild(price);
+
+            let input = document.createElement("input");
+            input.type = "number";
+            input.setAttribute("style", "width: 35px");
+            input.setAttribute("value", 1);
+            input.setAttribute("class", "quantity");
+            div.appendChild(input);
+
+            let trash = document.createElement("img");
+            trash.src = "trashcan.png";
+            trash.setAttribute("style", "width: 50px; height: 50px;")
+            trash.setAttribute("class", "delete trash");
+            div.appendChild(trash);
+
+            cart.appendChild(div);
+            shopping_cart.push(event.target.id);
+            
+          }
+        });
+
+        $(document).on("click", "img.delete", function() {
+          $(this).parent().remove();
+          let id = $(this).parent().attr("id");
+          let index = shopping_cart.indexOf(id);
+          shopping_cart.splice(index, 1);
+        });        
+        
+      });
+    </script>
+  </head>
+
+  <body>
+    <header>
+      <h2 style="font-size: 25px;"> 
+        <img src="logo.png" alt="logo" width="100" height="100" style="vertical-align: middle;">
+        Cooper's Sandwiches 
+      </h2>
+
+      <h1 style="font-size: 45px;"> Shop </h1>
+      
+      <nav style="text-align: center; font-size: 25px;">
+        <a href="home.html"> <u>Home</u></a> | 
+        <a href="nutrition.html"> <u>Nutrition</u></a> | 
+        <a href="menu.html"> <u>Menu</u></a> |
+        <a href="game.html"> <u>Game</u></a>
+      </nav>
+    </header>
+
+    <table style="table-layout: fixed; width: 100%; height: 100%;">
+      <tr>
+        <td>
+          <fieldset>
+            <table>
+              <tr>
+                <th colspan="3" style="font-size: 30px;">Shirts - $24.95</th>
+              </tr>
+              <tr class="shirt">
+                <td class="item" id="0">Logo (Black)</td>
+                <td class="item" id="1">Logo (White)</td>
+                <td class="item" id="2">Pastrami (Black)</td>
+              </tr>
+              <tr class="shirt">
+                <td  class="item" id="3">Cooper's Sandwiches (Black)</td>
+              </tr>
+        
+              <tr>
+                <th colspan="3" style="font-size: 30px;">Jackets/Hoodies - $44.95</th>
+              </tr>
+              <tr class="hoodie">
+                <td class="item" id="4">Logo (Black)</td>
+                <td class="item" id="5">Logo (White)</td>
+                <td class="item" id="6">Logo (Orange)</td>
+              </tr>
+              <tr class="shirt">
+                <td class="item" id="7">Pastrami (Black)</td>
+                <td class="item" id="8">Pastrami (White)</td>
+              </tr>
+        
+              <tr>
+                <th colspan="3" style="font-size: 30px;">Hats - $14.95</th>
+              </tr>
+              <tr class="hat">
+                <td class="item" id="9">Logo (Black)</td>
+                <td class="item" id="10">Logo (Tan)</td>
+                <td class="item" id="11">Cooper's Sandwiches (Black)</td>
+              </tr>
+            </table>
+          </fieldset>
+        </td>
+        <td>
+          <h1>Shopping Cart (click on item to add to cart)</h1>
+          <div id="cart" style="overflow: hidden; display: flex; flex-direction: column; flex-wrap: wrap; height: 300px; margin-bottom: 150px;">
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <footer>Copyright &copy; by Cooper Rapp</footer>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+li {
+  padding-bottom: 5px;
+  padding-right: 35px;
+  transition-property: all;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+}
+
+li:hover {
+  font-size: 20px;
+}
+
+label {
+  padding-bottom: 10px;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+p, li, input, label {
+  font-family: 'Dosis', sans-serif;
+}
+
+.border {
+  border: 2px solid black; 
+  border-collapse: collapse;
+  background: radial-gradient(circle, coral, darksalmon);
+}

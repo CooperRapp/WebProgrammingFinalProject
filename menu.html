@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title> Menu </title>
+
+    <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="everything.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@400;600&display=swap" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+      $(document).ready(function() 
+      {
+        let hot = document.getElementById("hot_sandwich");
+        let cold = document.getElementById("cold_sandwich");
+        let side = document.getElementById("side");
+
+        $("#hot").click(()=> {
+          $("#hot_sandwich").attr("style", "display: grid");
+          $("#cold_sandwich").attr("style", "display: none");
+          $("#side").attr("style", "display: none");
+        });
+        
+        $("#cold").click(()=> {
+          $("#hot_sandwich").attr("style", "display: none");
+          $("#cold_sandwich").attr("style", "display: grid");
+          $("#side").attr("style", "display: none");
+        });
+
+        $("#sides").click(()=> {
+          $("#hot_sandwich").attr("style", "display: none");
+          $("#cold_sandwich").attr("style", "display: none");
+          $("#side").attr("style", "display: grid");
+        });
+      });
+    </script>
+    
+  </head>
+
+  <body>
+    <header>
+      <h2 style="font-size: 25px;"> 
+        <img src="logo.png" alt="logo" width="100" height="100" style="vertical-align: middle;">
+        Cooper's Sandwiches
+      </h2>
+
+      <h1 style="font-size: 45px;"> Menu </h1>
+      
+      <nav style="text-align: center; font-size: 25px; padding-bottom: 15px;">
+        <a href="home.html"> <u>Home</u></a> | 
+        <a href="nutrition.html"> <u>Nutrition</u></a> | 
+        <a href="shop.html"> <u>Shop</u></a> |
+        <a href="game.html"> <u>Game</u></a>
+      </nav>
+
+      <hr>
+    </header>
+    
+    <div style="display: flex; gap: 50px; margin-left: 41.5%;">
+      <h1 class="title" id="hot"> Hot </h1>
+      <h1 class="title" id="cold"> Cold  </h1>
+      <h1 class="title" id="sides"> Sides </h1>
+    </div>
+
+    <div class="hot-cold-grid-layout" id="hot_sandwich">
+      <div id="grid1">$10.95 - The Philly Cheese</div>
+      <div id="grid2">$11.20 - The Blazin Chicken</div>
+      <div id="grid3">$13.00 - Cooper's Hot Pastrami</div>
+      <div id="grid4">$9.95 - Saucy Meatball Sub</div>
+      <div id="grid5">$13.95 - BBQ Pulled Pork</div>
+      <div id="grid6">$11.00 - The Pizzawich</div>
+      <div id="grid7">$12.50 - Hot Chicken Mac & Cheese</div>
+      <div id="grid8">$11.20 - Döner Kebab</div>
+      <div id="grid9">$9.20 - The Grilled Cheese</div>
+      <div id="grid10">$10.00 - Tuna Melt</div>
+      <div id="grid11">$10.95 - Chicken Pesto</div>
+      <div id="grid12">$13.95 - French Dip</div>
+    </div>
+
+    <div class="hot-cold-grid-layout" id="cold_sandwich" style="display: none;">
+      <div id="grid1">$10.95 - Chicken Caesar</div>
+      <div id="grid2">$11.20 - Salmon Egg Salad</div>
+      <div id="grid3">$13.00 - Cooper's Cold Pastrami</div>
+      <div id="grid4">$9.95 - Veggiwich</div>
+      <div id="grid5">$10.80 - Turkey Club</div>
+      <div id="grid6">$11.00 - Muffuletta</div>
+      <div id="grid7">$10.50 - Caprese Sandwich</div>
+      <div id="grid8">$11.20 - BLT</div>
+      <div id="grid9">$9.20 - Ham & Cheese</div>
+      <div id="grid10">$10.00 - Avocado Egg</div>
+      <div id="grid11">$10.95 - Tomatowich</div>
+      <div id="grid12">$12.50 - Roast Beef</div>
+    </div>
+
+    <div class="side-grid-layout" id="side" style="display: none;">
+      <div id="grid1">$4.00 - French Fries</div>
+      <div id="grid2">$4.50 - Sweet Potato Fries</div>
+      <div id="grid3">$3.95 - Tater Tots</div>
+      <div id="grid4">$3.20 - Coleslaw</div>
+      <div id="grid5">$2.00 - Chips</div>
+      <div id="grid6">$3.00 - Pickles</div>
+    </div>
+    
+    <footer>Copyright &copy; by Cooper Rapp</footer>
+  </body>
+</html>

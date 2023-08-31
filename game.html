@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title> Game </title>
+
+    <link rel="stylesheet" href="game.css">
+    <link rel="stylesheet" href="everything.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@400;600&display=swap" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>  
+
+    <script type="text/javascript">
+      function game_object(xpos, ypos, up)
+      {
+        this.xpos = xpos;
+        this.ypos = ypos;
+        this.up = new Boolean();
+      }
+  
+      var blade1 = new game_object(130, 0);
+      var blade2 = new game_object(295, 175);
+      var blade3 = new game_object(460, 100);
+      var sandwich = new game_object(645, 275);
+      var player = new game_object(0, 275);
+      var idle_index = 0;
+      var run_index = 0;
+      var left;
+      var right;
+      var running = new Boolean();
+      running = false;
+      var flip = new Boolean();
+  
+      function move_left() 
+      {
+        left = setInterval(function(){ player.xpos -= 6; }, 50); 
+        running = true;
+        var idle_div = document.getElementById("idle_div");
+        idle_div.setAttribute("class", "flip");
+        flip = true;
+      }  
+      function stop_move_left() 
+      { 
+        clearInterval(left); 
+        running = false;
+      }
+      function move_right() 
+      { 
+        right = setInterval(function(){ player.xpos += 6; }, 50); 
+        running = true;
+        flip = false;
+      }  
+      function stop_move_right() 
+      { 
+        clearInterval(right);
+        running = false; 
+      }
+  
+      $(document).ready(function() 
+      { 
+        var canvas = document.getElementById("gameCanvas");
+        var game = canvas.getContext("2d");
+        var bladeImg = document.getElementById("blade");
+        var sandwichImg = document.getElementById("sandwich");
+        var idles = document.getElementsByClassName("idle");   
+        var runs = document.getElementsByClassName("run");   
+  
+        window.requestAnimationFrame(draw);
+        function draw()
+        {
+          game.clearRect(0, 0, 760, 385);
+          game.drawImage(bladeImg, blade1.xpos, blade1.ypos);
+          game.drawImage(bladeImg, blade2.xpos, blade2.ypos);
+          game.drawImage(bladeImg, blade3.xpos, blade3.ypos);
+          game.drawImage(sandwichImg, sandwich.xpos, sandwich.ypos);
+          if(running) game.drawImage(runs[run_index], player.xpos, player.ypos);
+          if(!running) game.drawImage(idles[idle_index], player.xpos, player.ypos);
+          move_blades();
+          move_sandwich();
+          hit_blade();
+          endgame();
+          window.requestAnimationFrame(draw);
+        }
+        
+        function endgame()
+        {
+          if(player.xpos > 600 && player.xpos < 630)
+          {
+            alert("CONGRATS YOU BEAT THE GAME!!! \n *refresh to restart*");
+            player.xpos = 631;
+          }
+        }
+  
+        function hit_blade()
+        {
+          if(player.xpos >= 85 && player.xpos <= 175 && blade1.ypos >= 150)
+          {
+            player.xpos = 0;
+          }
+          if(player.xpos >= 250 && player.xpos <= 340 && blade2.ypos >= 150)
+          {
+            player.xpos = 0;
+          }
+          if(player.xpos >= 405 && player.xpos <= 495 && blade3.ypos >= 150)
+          {
+            player.xpos = 0;
+          }
+        }
+  
+        function idle_anim()
+        {
+          idle_index++;
+          if(idle_index == 3) idle_index = 0;
+        }
+        setInterval(idle_anim, 200);
+  
+        function run_anim()
+        {
+          run_index++;
+          if(run_index == 7) run_index = 0;
+        }
+        setInterval(run_anim, 150);
+        
+        function move_sandwich()
+        {
+          if(sandwich.ypos >= 300) sandwich.up = true;
+          if(sandwich.ypos <= 275) sandwich.up = false;
+          if(sandwich.up) sandwich.ypos -= .6;
+          else if(!sandwich.up) sandwich.ypos += .6;
+        }
+  
+        function move_blades()
+        {
+          if(blade1.ypos >= 175) blade1.up = true;
+          if(blade1.ypos <= 0) blade1.up = false;
+          if(blade1.up) blade1.ypos -= 4;
+          else if(!blade1.up) blade1.ypos += 4;
+  
+          if(blade2.ypos >= 175) blade2.up = true;
+          if(blade2.ypos <= 0) blade2.up = false;
+          if(blade2.up) blade2.ypos -= 4;
+          else if(!blade2.up) blade2.ypos += 4;
+  
+          if(blade3.ypos >= 175) blade3.up = true;
+          if(blade3.ypos <= 0) blade3.up = false;
+          if(blade3.up) blade3.ypos -= 4;
+          else if(!blade3.up) blade3.ypos += 4;
+        }
+  
+      });
+      
+    </script>
+  </head>
+  
+  <body>
+    <header>
+      <h2 style="font-size: 25px;"> 
+        <img src="logo.png" alt="logo" width="100" height="100" style="vertical-align: middle;">
+        Cooper's Sandwiches
+      </h2>
+
+      <h1 class="animation" style="font-size: 45px;"> Game </h1>
+      
+      <nav style="text-align: center; font-size: 25px; padding-bottom: 20px; margin-left: 10px;">
+        <a href="home.html"> <u>Home</u></a> |
+        <a href="menu.html"> <u>Menu</u></a> | 
+        <a href="nutrition.html"> <u>Nutrition</u></a> | 
+        <a href="shop.html"> <u>Shop</u></a>
+      </nav>
+    </header>
+
+    <p>
+      Use the arrow buttons to move and dodge the blades to reach the sandwich!
+    </p>
+
+    <canvas id="gameCanvas" width="760" height="385">
+      <img src="./blade.png" id="blade"> 
+      <img src="./sandwich.png" id="sandwich">
+      <img src="./idle/Idle1.png" class="idle"> 
+      <img src="./idle/Idle2.png" class="idle"> 
+      <img src="./idle/Idle3.png" class="idle"> 
+      <img src="./idle/Idle4.png" class="idle"> 
+      <img src="./run/Run1.png" class="run">
+      <img src="./run/Run2.png" class="run"> 
+      <img src="./run/Run3.png" class="run"> 
+      <img src="./run/Run4.png" class="run"> 
+      <img src="./run/Run5.png" class="run"> 
+      <img src="./run/Run6.png" class="run"> 
+      <img src="./run/Run7.png" class="run"> 
+      <img src="./run/Run8.png" class="run"> 
+    </canvas>
+
+    <img src="./left_arrow.png" id="left" style="margin-left: 575px" onmousedown="move_left();" onmouseup="stop_move_left();" onmouseout="stop_move_left();">
+    <img src="./right_arrow.png" id="right" onmousedown="move_right();" onmouseup="stop_move_right();" onmouseout="stop_move_right();">
+
+    <footer>Copyright &copy; by Cooper Rapp</footer>
+
+  </body>
+</html>

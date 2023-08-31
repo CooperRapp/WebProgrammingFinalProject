@@ -1,0 +1,54 @@
+canvas {
+  background: url('./background.png');
+  display: block;
+  margin: auto;
+  padding: 0; 
+  border-radius: 10px;
+}
+
+p {
+  font-family: 'Dosis', sans-serif;
+  font-size: 15px;
+  display: flex;
+  text-align: center;
+  margin-left: 520px;
+  transition-property: all;
+  transition-duration: 0.5s;
+  transition-timing-function: linear;
+}
+
+p:hover {
+  text-shadow: 0px 5px 5px;
+}
+
+@keyframes rotate {
+  0% {
+    perspective: 500px;
+    transform: rotateZ(0deg);
+    font-weight: 300;
+  }
+  25% {
+    perspective: 500px;
+    transform: rotateZ(20deg);
+    font-weight: 600;
+  }
+  50% {
+    perspective: 500px;
+    transform: rotateZ(0deg);
+    font-weight: 300;
+  }
+  75% {
+    perspective: 500px;
+    transform: rotateZ(-20deg);
+    font-weight: 600;
+  }
+  100% {
+    perspective: 500px;
+    transform: rotateZ(0deg);
+    font-weight: 300;
+  }
+}
+
+.animation {
+  animation: rotate 3s linear infinite;
+}
